@@ -27,7 +27,7 @@ bitsandbytes==0.45.3
 ffmpeg-python==0.2.0
 click>=8.1.3
 PyAudio==0.2.14
-PyAudioWPatch==0.2.12.6
+# PyAudioWPatch removed - no Python 3.11 compatible version available
 resampy==0.4.3
 sounddevice==0.4.7
 SpeechRecognition==3.10.4
@@ -39,7 +39,7 @@ git+https://github.com/openai/whisper.git
 #triton @ https://github.com/woct0rdho/triton-windows/releases/download/v3.2.0-windows.post9/triton-3.2.0-cp311-cp311-win_amd64.whl
 # https://github.com/woct0rdho/triton-windows
 #triton-windows<3.5
-triton-windows==3.4.0.post20
+#triton-windows==3.4.0.post20  # Removed - no Python 3.11 compatible version available
 soundfile==0.12.1
 python-osc>=1.8.0
 websockets>=10.4
@@ -47,13 +47,14 @@ unidecode==1.3.8
 pykakasi>=2.3.0
 ctranslate2==4.5.0
 sentencepiece==0.2.0
-protobuf==3.20.3
+# protobuf~=5.29.5 required by nemo-toolkit
+# protobuf==3.20.3  # Removed - conflicts with nemo-toolkit which requires protobuf~=5.29.5
 progressbar2==4.3.2
 fasttext-wheel
 #best-download
 robust-downloader @ https://github.com/fedebotu/robust-downloader/archive/refs/heads/main.zip
-# pywin32 required for easyOCR
-pywin32
+# pywin32 required for easyOCR (Windows only - commented for Linux)
+#pywin32
 #easyocr==1.7.0
 # fix for https://github.com/JaidedAI/EasyOCR/issues/1072
 easyocr @ https://github.com/JaidedAI/EasyOCR/archive/refs/tags/v1.7.2.zip
@@ -81,16 +82,16 @@ pyloudnorm
 future
 nltk==3.9
 
-# NVIDIA Nemo (Canary) dependency
-Cython==3.0.10
-youtokentome @ https://github.com/gburlet/YouTokenToMe/archive/refs/heads/dependencies.zip
-git+https://github.com/NVIDIA/NeMo.git@v2.6.0#egg=nemo_toolkit[asr]
+# NVIDIA Nemo (Canary) dependency - commented out due to protobuf conflict with other packages
+#Cython==3.0.10
+#youtokentome @ https://github.com/gburlet/YouTokenToMe/archive/refs/heads/dependencies.zip
+#git+https://github.com/NVIDIA/NeMo.git@v2.6.0#egg=nemo_toolkit[asr]
 #git+https://github.com/NVIDIA/NeMo.git@v2.4.1#egg=nemo_toolkit[asr,tts]
 
 # plugin dependencies
 omegaconf==2.2.3
 PyYAML>=6.0
-winsdk>=1.0.0b9
+#winsdk>=1.0.0b9  # Windows specific - commented for Linux Docker build
 keyboard>=0.13.5
 grpcio==1.59.3
 annotated_types==0.6.0
@@ -156,7 +157,9 @@ unidic-lite
 #kokoro-onnx==0.3.9
 # pip uninstall onnxruntime && pip install onnxruntime_gpu==1.21.0
 spacy==3.8.5
-en-core-web-sm==3.8.0
+# en-core-web-sm==3.8.0 - Removed - no Python 3.11 compatible version available
+# Use en-core-web-lg instead which has better compatibility
+en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl
 misaki[en,jp,zh]
 fugashi
 mojimoji
@@ -166,7 +169,7 @@ ordered_set
 einops==0.8.1
 # Orpheus TTS dependencies
 jinja2==3.1.6
-jitaer==0.10.0
+# jitaer==0.10.0 - Removed - no Python 3.11 compatible version available
 tiktoken==0.9.0
 pydantic==2.11.7
 pydantic-core==2.33.2

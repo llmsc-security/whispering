@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  whispering:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: whispering-container
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    ports:
+      - "11010:5000"
+    volumes:
+      - ./logs:/app/logs
+      - ./settings.yaml:/app/settings.yaml
