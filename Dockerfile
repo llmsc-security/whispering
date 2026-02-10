@@ -36,11 +36,14 @@ COPY . .
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+ENV NLTK_DATA=/app/nltk_data
 
 # Create entrypoint script with NLTK data download
 RUN echo '#!/bin/bash\n\
 set -e\n\
 \necho "Starting Whispering Tiger audio processing..."\n\
+\necho "Creating NLTK data directory..."\n\
+mkdir -p $NLTK_DATA\n\
 \necho "Downloading NLTK data..."\n\
 python -c "import nltk; nltk.download(\"wordnet\", quiet=True); nltk.download(\"punkt\", quiet=True); nltk.download(\"punkt_tab\", quiet=True)"\n\
 \ncd /app\n\
